@@ -12,7 +12,7 @@ import WishList from './pages/wishList.jsx';
 import OrderConfirmation from './components/orderConfirmation.jsx';
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter >
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
