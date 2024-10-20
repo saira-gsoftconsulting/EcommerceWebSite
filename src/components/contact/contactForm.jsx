@@ -6,7 +6,7 @@ import * as yup from "yup";
 import CustomInput from "../common/button/button";
 import { FaAddressBook, FaPhone, FaClock } from "react-icons/fa";
 import { useNavigate } from "react-router";
-const   ContactForm = () => {
+const ContactForm = () => {
   const schema = yup.object().shape({
     firstname: yup.string().required("First name is required"),
     lastname: yup.string().required("Last name is required"),
@@ -15,7 +15,7 @@ const   ContactForm = () => {
   });
   const {
     control,
-     handleSubmit,
+    handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -41,7 +41,7 @@ const   ContactForm = () => {
       <div className="flex flex-col-reverse lg:flex-row justify-between items-start my-8 max-w-7xl mx-auto space-y-8 lg:space-y-0 lg:space-x-8">
         <div className="w-full lg:w-1/2 space-y-4">
           <div className="flex items-start space-x-2 pt-8 md:p-auto">
-            <FaAddressBook   className="text-2xl" />
+            <FaAddressBook className="text-2xl" />
             <div>
               <p className="font-medium">Address</p>
               <p className="text-black">
