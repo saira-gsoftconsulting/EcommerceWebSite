@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../common/button/button";
+import emptyCart from "../../assests/images/empty.webp";
 import {
   removeFromCart,
   incrementQuantity,
@@ -8,19 +9,19 @@ import {
 } from "../../components/redux/features/productSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 const CartList = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const cartItems = useSelector((state) => state.product.cart);
-  const [address, setAddress] = useState("Main Street, Hayyat Abad");
+  const [address, setAddress] = useState("Johar Town Phase 2");
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
   const [newAddress, setNewAddress] = useState("");
   const handleRemove = (id) => {
     dispatch(removeFromCart({ id }));
   };
   const handleCheckout = () => {
-    navigate('/checkout', { state: { cartItems } }); 
+    navigate("/checkout", { state: { cartItems } });
   };
   const calculateSubtotal = () => {
     return cartItems.reduce((total, item) => {
@@ -33,14 +34,17 @@ const CartList = () => {
   const handleAddressChange = () => {
     if (newAddress) {
       setAddress(newAddress);
-      setIsAddressModalOpen(false); 
+      setIsAddressModalOpen(false);
     }
   };
   return (
     <div className="flex flex-col md:flex-col md:text-center lg:flex-row px-4 md:px-8 lg:px-12 gap-4">
       <div className="p-4 w-full">
         {cartItems.length === 0 ? (
-          <p className="text-2xl text-center">Your cart is empty.</p>
+          <div className="text-2xl flex flex-col items-center justify-center">
+            <img src={emptyCart} alt="Empty cart" className="h-64 w-64"/>
+            <p>No item in cart!</p>
+          </div>
         ) : (
           <ul>
             {cartItems.map((item) => (
@@ -90,7 +94,10 @@ const CartList = () => {
           Cart Totals
         </h2>
         <div>
-          <span className="text-blue-500 hover:underline text-xs font-bold cursor-pointer" onClick={() => setIsAddressModalOpen(true)}>
+          <span
+            className="text-blue-500 hover:underline text-xs font-bold cursor-pointer"
+            onClick={() => setIsAddressModalOpen(true)}
+          >
             {address}
           </span>
         </div>
@@ -101,17 +108,17 @@ const CartList = () => {
           <p className="text-xl text-[#B88E2F]">
             Total: Rs. {subtotal.toLocaleString()}
           </p>
-          <Button 
-            label="CheckOut" 
-            className="border py-2 my-6 border-black text-center px-7 rounded" 
-            onClick={handleCheckout} 
+          <Button
+            label="CheckOut"
+            className="border py-2 my-6 border-black text-center px-7 rounded"
+            onClick={handleCheckout}
           />
         </div>
       </div>
       {isAddressModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded-md shadow-md w-[90%] max-w-md">
-            <h2 className="text-2xl font-semibold mb-4">Change  Address</h2>
+            <h2 className="text-2xl font-semibold mb-4">Change Address</h2>
             <input
               type="text"
               value={newAddress}

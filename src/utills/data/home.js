@@ -521,6 +521,7 @@ export const data = {
       discount: "-50%",
       overlay: overlay,
     },
+    
     {
       id: 31,
       name: "Sjgyhjkuky",
